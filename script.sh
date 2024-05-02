@@ -1,3 +1,28 @@
+####################################################################
+# Get program version
+####################################################################
+
+program_exist(){
+    program_name=$1
+    command_line=`$program_name --version`
+    program_version=`echo $command_line`
+    
+    if [ "$program_version" != "" ];
+    then
+        echo "programa existe"
+        echo "$program_version"
+    else 
+        echo "programa não existe"        
+    fi
+
+}
+
+if 
+
+####################################################################
+# Install ZSH POWERLEVEL10K
+####################################################################
+
 sudo apt-get install zsh | 
 zsh | 
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" |
