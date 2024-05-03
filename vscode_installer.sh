@@ -65,6 +65,7 @@ shootProfile(){
 
 	fi
 }
+echo "Analysing system"
 shootProfile
 
 ####################################################################
@@ -72,20 +73,23 @@ shootProfile
 ####################################################################
 
 vscode_install_linux(){
-    if [ "$1" = "debian" ];
+	echo "Download VSCode, just wait"
+    
+	if [ "$1" = "debian" ];
     then
         sudo apt-get install wget gpg
         wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-        sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+		sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
         sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
         rm -f packages.microsoft.gpg
         sudo apt install apt-transport-https
         sudo apt update
+        echo "installing VSCode"
         sudo apt install code
         # echo "command debian"
     elif [ "$1" = "aix" ];
     then
-        git clone https://aur.archlinux.org/visual-studio-code-bin.git
+		git clone https://aur.archlinux.org/visual-studio-code-bin.git
         cd visual-studio-code-bin
         makepkg -sri
         echo "For troubleshooting visit: https://aur.archlinux.org"
@@ -95,6 +99,7 @@ vscode_install_linux(){
         sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
         sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/zypp/repos.d/vscode.repo'
         sudo zypper refresh
+		echo "installing VSCode"
         sudo zypper install code
         # echo "command opensuse"
     else
@@ -128,4 +133,5 @@ echo "$vscode_exist"
 if [ "$vscode_exist" = "install vscode" ];
 then 
     echo $vscode_install
+	echo `code .`
 fi

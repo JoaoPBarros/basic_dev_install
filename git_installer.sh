@@ -73,21 +73,26 @@ shootProfile
 
 
 git_install_linux(){
-    if [ "$1" = "debian" ];
+    echo "installing git, just wait"
+    
+	if [ "$1" = "debian" ];
     then
-        echo `apt-get install git`
-        # echo "command debian"
+        echo "command debian"
+		echo `apt-get install git;y`
     elif [ "$1" = "aix" ];
     then
-        echo `pacman -S git`
-        # echo "command arch linux"
+        echo "command arch linux"
+        echo `pacman -S git;y`
     elif [ "$1" = "suse" ];
     then
-        echo `zypper install git`
-        # echo "command opensuse"
+        echo "command opensuse"
+        echo `zypper install git;y`
     else
         echo "\nERROR: System not recognized.\nERROR: download GIT latest version from source https://git-scm.com/download/linux"
+		break
     fi
+	echo "installed"
+	echo `git -V`
 }
 
 ####################################################################
