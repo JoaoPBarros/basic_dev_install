@@ -113,10 +113,9 @@ vscode_install_linux(){
 
 program_exist(){
     program_name=$1
-    command_line=`$program_name --version`
-    program_version=`echo $command_line`
+    program_version=`$program_name -v`
     
-    if [ "$program_version" != "" ];
+    if [ `$program_version` != "" ];
     then
         echo "$program_version"
     else 
@@ -127,10 +126,10 @@ program_exist(){
 
 
 vscode_install=`vscode_install_linux $DistroBasedOn`
-vscode_exist=`program_exist vscode`
+vscode_exist=`program_exist code`
 echo "$vscode_exist"
 
-if [ "$vscode_exist" = "install vscode" ];
+if [ "$vscode_exist" = "install code" ];
 then 
     echo $vscode_install
 	echo `code .`
